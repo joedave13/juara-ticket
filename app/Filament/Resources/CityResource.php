@@ -43,7 +43,8 @@ class CityResource extends Resource
                     ->prefixIcon('heroicon-m-link'),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->prefixIcon('heroicon-m-phone'),
                 Forms\Components\FileUpload::make('photo')
                     ->required()
                     ->image()
