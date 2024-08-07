@@ -13,8 +13,9 @@ class CityRepository implements CityRepositoryInterface
         return City::query()->withCount('tickets')->get();
     }
 
-    public function getTicketBasedOnCity(City $city): Collection
+    public function getTicketBasedOnCity(City $city): City
     {
-        return $city->with(['tickets'])->withCount('tickets')->get();
+        $city->load('tickets')->loadCount('tickets');
+        return $city;
     }
 }

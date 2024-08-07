@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Services\FrontService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -13,7 +14,7 @@ class FrontController extends Controller
         //
     }
 
-    public function index()
+    public function index(): View
     {
         $data = $this->frontService->getFrontPageData();
 

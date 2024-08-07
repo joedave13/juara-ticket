@@ -9,5 +9,5 @@ interface CityRepositoryInterface
 {
     public function all(): Collection;
 
-    public function getTicketBasedOnCity(City $city): Collection;
+    public function getTicketBasedOnCity(City $city): City;
 }
