@@ -20,6 +20,8 @@ class TicketRepository implements TicketRepositoryInterface
 
     public function show(Ticket $ticket): Ticket
     {
+        $ticket->load(['category', 'city']);
+
         return $ticket;
     }
 
