@@ -13,8 +13,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::all();
     }
 
-    public function getTicketBasedOnCategory(Category $category): Collection
+    public function getTicketBasedOnCategory(Category $category): Category
     {
-        return $category->with(['tickets'])->withCount('tickets')->get();
+        $category->load('tickets')->loadCount('tickets');
+        return $category;
     }
 }

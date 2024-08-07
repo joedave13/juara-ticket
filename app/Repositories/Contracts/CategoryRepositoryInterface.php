@@ -9,5 +9,5 @@ interface CategoryRepositoryInterface
 {
     public function all(): Collection;
 
-    public function getTicketBasedOnCategory(Category $category): Collection;
+    public function getTicketBasedOnCategory(Category $category): Category;
 }
