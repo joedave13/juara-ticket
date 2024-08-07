@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Models\Booking;
 use App\Models\Ticket;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\TicketRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class BookingService
 {
@@ -48,5 +51,50 @@ class BookingService
             'tax_amount' => $amount['tax_amount'],
             'total' => $amount['total_amount']
         ]);
+    }
+
+    public function getPaymentSummary(): array
+    {
+        $data['booking'] = Session::get('booking');
+        $data['ticket'] = $this->ticketRepository->show(Ticket::query()->find($data['booking']['ticket_id']));
+
+        return $data;
+    }
+
+    public function storePayment(array $validated): Booking | null
+    {
+        $booking = Session::get('booking');
+
+        DB::transaction(function () use ($validated, $booking) {
+            if (isset($validated['payment_proof'])) {
+                $data['payment_proof'] = $validated['payment_proof']->store('booking/payment_proof', 'public');
+            }
+
+            $data['code'] = 'TRX' . date('Ymd') . strtoupper(Str::random(5));
+            $data['name'] = $booking['name'];
+            $data['phone'] = $booking['phone'];
+            $data['email'] = $booking['email'] ?? null;
+            $data['ticket_id'] = $booking['ticket_id'];
+            $data['total_participant'] = $booking['total_participant'];
+            $data['booking_date'] = $booking['booking_date'];
+            $data['price'] = $booking['price'];
+            $data['total'] = $booking['total'];
+            $data['payment_method'] = $validated['payment_method'];
+
+            $createdBooking = $this->bookingRepository->create($data);
+
+            Session::forget('booking');
+
+            return $createdBooking;
+        });
+
+        return null;
+    }
+
+    public function checkBookingDetail(string $code, string $phone): Booking
+    {
+        $booking = $this->bookingRepository->getBookingDetail($code, $phone);
+
+        return $booking;
     }
 }

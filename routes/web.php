@@ -30,7 +30,7 @@ Route::prefix('booking')->name('booking.')->group(function () {
     Route::post('/payment', [BookingController::class, 'paymentStore'])->name('payment-store');
 
     Route::get('/check', [BookingController::class, 'check'])->name('check');
-    Route::post('/detail', [BookingController::class, 'detail'])->name('detail');
+    Route::post('/check-result', [BookingController::class, 'checkResult'])->name('check-result');
 
     Route::get('/create/{ticket:slug}', [BookingController::class, 'create'])->name('create');
     Route::post('/{ticket:slug}', [BookingController::class, 'store'])->name('store');
