@@ -15,7 +15,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function getTicketBasedOnCategory(Category $category): Category
     {
-        $category->load('tickets')->loadCount('tickets');
+        $category->load(['tickets', 'tickets.city:id,name'])->loadCount('tickets');
         return $category;
     }
 }
