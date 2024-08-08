@@ -3,6 +3,10 @@
         Home
     </x-slot>
 
+    @push('styles')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    @endpush
+
     {{-- Navbar --}}
     <x-navbars.front-navbar />
     {{-- End --}}
