@@ -43,6 +43,8 @@ class Ticket extends Model
         'category_id' => 'integer',
         'city_id' => 'integer',
         'is_popular' => 'boolean',
+        'opened_at' => 'datetime',
+        'closed_at' => 'datetime'
     ];
 
     public function ticketPhotos(): HasMany
