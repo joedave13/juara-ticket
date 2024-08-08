@@ -18,6 +18,6 @@ class FrontController extends Controller
     {
         $data = $this->frontService->getFrontPageData();
 
-        return view('pages.front.index', $data);
+        return view('pages.front.index', compact('data'));
     }
 }

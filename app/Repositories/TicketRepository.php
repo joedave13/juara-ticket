@@ -10,12 +10,12 @@ class TicketRepository implements TicketRepositoryInterface
 {
     public function getPopularTickets(int $limit = 4): Collection
     {
-        return Ticket::with(['category:name'])->where('is_popular', true)->take($limit)->get();
+        return Ticket::with(['category:id,name'])->where('is_popular', true)->take($limit)->get();
     }
 
     public function getLatestTicket(): Collection
     {
-        return Ticket::with(['city:name'])->latest()->get();
+        return Ticket::with(['city:id,name'])->latest()->get();
     }
 
     public function show(Ticket $ticket): Ticket
