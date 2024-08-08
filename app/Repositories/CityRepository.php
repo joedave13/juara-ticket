@@ -15,7 +15,7 @@ class CityRepository implements CityRepositoryInterface
 
     public function getTicketBasedOnCity(City $city): City
     {
-        $city->load('tickets')->loadCount('tickets');
+        $city->load(['tickets', 'tickets.category:id,name,dark_icon'])->loadCount('tickets');
         return $city;
     }
 }
