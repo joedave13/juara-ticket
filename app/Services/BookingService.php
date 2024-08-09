@@ -55,7 +55,7 @@ class BookingService
 
     public function getPaymentSummary(): array
     {
-        $data['booking'] = Session::get('booking');
+        $data['booking'] = Session::get('booking_session');
         $data['ticket'] = $this->ticketRepository->show(Ticket::query()->find($data['booking']['ticket_id']));
 
         return $data;
@@ -63,7 +63,7 @@ class BookingService
 
     public function storePayment(array $validated): Booking | null
     {
-        $booking = Session::get('booking');
+        $booking = Session::get('booking_session');
 
         DB::transaction(function () use ($validated, $booking) {
             if (isset($validated['payment_proof'])) {
@@ -83,7 +83,7 @@ class BookingService
 
             $createdBooking = $this->bookingRepository->create($data);
 
-            Session::forget('booking');
+            Session::forget('booking_session');
 
             return $createdBooking;
         });

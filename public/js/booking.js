@@ -1,10 +1,10 @@
 const plus = document.getElementById("plus");
 const minus = document.getElementById("minus");
 const text = document.getElementById("count-text");
-const people = document.getElementById("people");
+const people = document.getElementById("total-participant");
 const totalPriceElement = document.getElementById("total-price");
 
-const pricePerItem = 8559000; // default price per item in Rupiah
+// const pricePerItem = "{!! $ticket->price !!}"; // default price per item in Rupiah
 
 function formatRupiah(number) {
     return "Rp " + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -13,6 +13,7 @@ function formatRupiah(number) {
 function updateTotalPrice() {
     let currentValue = parseInt(people.value);
     let totalPrice = currentValue * pricePerItem;
+
     totalPriceElement.textContent = formatRupiah(totalPrice);
 }
 
