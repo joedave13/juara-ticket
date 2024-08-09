@@ -1,6 +1,6 @@
 <nav id="Bottom-Nav" class="fixed bottom-0 w-full max-w-[640px] bg-white px-4 py-5 z-30">
     <ul class="flex justify-evenly max-[400px]:justify-between">
-        <li class=" text-[#F97316]">
+        <li class="text-{{ Route::currentRouteName() == 'front.index' ? '[#F97316]' : '[#13181D]' }}">
             <a href="{{ route('front.index') }}" class="menu">
                 <div class="group flex flex-col items-center text-center gap-[10px]">
                     <div class="w-6 h-6 flex shrink-0">
@@ -32,7 +32,8 @@
                 </div>
             </a>
         </li>
-        <li class=" text-[#13181D]">
+
+        <li class="text-{{ Route::currentRouteName() == 'booking.check' ? '[#F97316]' : '[#13181D]' }}">
             <a href="{{ route('booking.check') }}" class="menu">
                 <div class="group flex flex-col items-center text-center gap-[10px]">
                     <div class="w-6 h-6 flex shrink-0">
@@ -54,6 +55,7 @@
                 </div>
             </a>
         </li>
+
         <li class=" text-[#13181D]">
             <a href="#" class="menu">
                 <div class="group flex flex-col items-center text-center gap-[10px]">
@@ -78,6 +80,7 @@
                 </div>
             </a>
         </li>
+
         <li class=" text-[#13181D]">
             <a href="#" class="menu">
                 <div class="group flex flex-col items-center text-center gap-[10px]">

@@ -102,8 +102,13 @@ class BookingService
 
     public function checkBookingDetail(string $code, string $phone): Booking
     {
-        $booking = $this->bookingRepository->getBookingDetail($code, $phone);
+        $booking = $this->bookingRepository->getBookingDetailByCodeAndPhone($code, $phone);
 
         return $booking;
+    }
+
+    public function getBookingDetailById(Booking $booking): Booking
+    {
+        return $this->bookingRepository->getBookingDetailById($booking);
     }
 }

@@ -68,7 +68,9 @@ class BookingController extends Controller
 
     public function show(Booking $booking): View
     {
-        return view('pages.booking.show', compact('booking'));
+        $data = $this->bookingService->getBookingDetailById($booking);
+
+        return view('pages.booking.show', compact('data'));
     }
 
     public function check(): View
@@ -81,6 +83,6 @@ class BookingController extends Controller
         $validatedData = $request->validated();
         $data = $this->bookingService->checkBookingDetail($validatedData['code'], $validatedData['phone']);
 
-        return view('pages.booking.show', $data);
+        return view('pages.booking.show', compact('data'));
     }
 }

@@ -86,7 +86,7 @@
                             <img src="{{ asset('assets/images/icons/cards.svg') }}" class="w-6 h-6" alt="icon">
                             <p class="font-semibold text-sm leading-[21px]">Credit Card</p>
                         </div>
-                        <input type="radio" name="payment_method" id="credit" value="credit-card"
+                        <input type="radio" name="payment_method" id="credit" value="credit_card"
                             class="absolute top-1/2 left-1/2 -z-10">
                     </label>
                 </div>

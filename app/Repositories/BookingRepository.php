@@ -12,11 +12,18 @@ class BookingRepository implements BookingRepositoryInterface
         return Booking::query()->create($data);
     }
 
-    public function getBookingDetail(string $code, string $phone): Booking
+    public function getBookingDetailByCodeAndPhone(string $code, string $phone): Booking
     {
-        return Booking::with(['ticket', 'ticket:city'])
+        return Booking::with(['ticket', 'ticket.city'])
             ->where('code', $code)
             ->where('phone', $phone)
             ->first();
+    }
+
+    public function getBookingDetailById(Booking $booking): Booking
+    {
+        $booking->load(['ticket', 'ticket.city']);
+
+        return $booking;
     }
 }
