@@ -28,6 +28,8 @@ class TicketResource extends Resource
 
     protected static ?string $navigationGroup = 'Transaction';
 
+    protected static ?int $navigationSort = 1;
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->with('category:id,name');
@@ -45,7 +47,7 @@ class TicketResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Set $set) => $set('slug', Str::slug($state) . '-' . strtolower(Str::random(5))))
+                            ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state) . '-' . strtolower(Str::random(5))))
                             ->prefixIcon('heroicon-m-ticket'),
                         Forms\Components\TextInput::make('slug')
                             ->required()
@@ -122,7 +124,7 @@ class TicketResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->description(fn (Ticket $record): string => $record->category->name)
+                    ->description(fn(Ticket $record): string => $record->category->name)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('city.name')
                     ->numeric()

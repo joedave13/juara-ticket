@@ -50,4 +50,16 @@ class Booking extends Model
     {
         return $this->belongsTo(Ticket::class);
     }
+
+    public function approve(): void
+    {
+        $this->status = BookingStatus::SUCCESS;
+        $this->save();
+    }
+
+    public function reject(): void
+    {
+        $this->status = BookingStatus::CANCEL;
+        $this->save();
+    }
 }

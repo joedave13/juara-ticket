@@ -23,4 +23,22 @@ enum BookingStatus: string implements HasLabel
             self::CANCEL => 'bg-[#D40000]'
         };
     }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::PENDING => 'gray',
+            self::SUCCESS => 'success',
+            self::CANCEL => 'danger'
+        };
+    }
+
+    public function getIcon(): string
+    {
+        return match ($this) {
+            self::PENDING => 'heroicon-m-clock',
+            self::SUCCESS => 'heroicon-m-check',
+            self::CANCEL => 'heroicon-m-x-mark'
+        };
+    }
 }
