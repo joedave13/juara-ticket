@@ -46,7 +46,7 @@ class BookingController extends Controller
     {
         $data = $this->bookingService->getPaymentSummary();
 
-        return view('pages.booking.payment', $data);
+        return view('pages.booking.payment', compact('data'));
     }
 
     public function paymentStore(PaymentStoreRequest $request): RedirectResponse

@@ -39,6 +39,8 @@ class BookingService
 
     public function storeBookingSession(Ticket $ticket, array $data, $amount): void
     {
+        Session::forget('booking_session');
+
         Session::put('booking_session', [
             'name' => $data['name'],
             'phone' => $data['phone'],
@@ -64,8 +66,11 @@ class BookingService
     public function storePayment(array $validated): Booking | null
     {
         $booking = Session::get('booking_session');
+        $createdBooking = null;
 
-        DB::transaction(function () use ($validated, $booking) {
+        DB::beginTransaction();
+
+        try {
             if (isset($validated['payment_proof'])) {
                 $data['payment_proof'] = $validated['payment_proof']->store('booking/payment_proof', 'public');
             }
@@ -85,10 +90,14 @@ class BookingService
 
             Session::forget('booking_session');
 
-            return $createdBooking;
-        });
+            DB::commit();
 
-        return null;
+            return $createdBooking;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return null;
+        }
     }
 
     public function checkBookingDetail(string $code, string $phone): Booking
