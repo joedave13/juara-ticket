@@ -66,6 +66,11 @@ class BookingController extends Controller
         return view('pages.booking.finish', compact('booking'));
     }
 
+    public function show(Booking $booking): View
+    {
+        return view('pages.booking.show', compact('booking'));
+    }
+
     public function check(): View
     {
         return view('pages.booking.check');

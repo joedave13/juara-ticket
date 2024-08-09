@@ -24,8 +24,6 @@ Route::prefix('ticket')->name('ticket.')->group(function () {
 });
 
 Route::prefix('booking')->name('booking.')->group(function () {
-    Route::get('/{booking}', [BookingController::class, 'show'])->name('show');
-
     Route::get('/finish/{booking}', [BookingController::class, 'finish'])->name('finish');
 
     Route::get('/payment', [BookingController::class, 'payment'])->name('payment');
@@ -36,4 +34,6 @@ Route::prefix('booking')->name('booking.')->group(function () {
 
     Route::get('/create/{ticket:slug}', [BookingController::class, 'create'])->name('create');
     Route::post('/{ticket:slug}', [BookingController::class, 'store'])->name('store');
+
+    Route::get('/{booking}', [BookingController::class, 'show'])->name('show');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,6 +43,7 @@ class Booking extends Model
         'booking_date' => 'date',
         'price' => 'integer',
         'total' => 'integer',
+        'status' => BookingStatus::class
     ];
 
     public function ticket(): BelongsTo
