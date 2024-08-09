@@ -20,7 +20,7 @@ enum BookingStatus: string implements HasLabel
         return match ($this) {
             self::PENDING => 'bg-[#13181D]',
             self::SUCCESS => 'bg-[#07B704]',
-            self::CANCEL => 'bg-[#D40000]'
+            self::CANCEL => 'bg-[#FF1927]'
         };
     }
 

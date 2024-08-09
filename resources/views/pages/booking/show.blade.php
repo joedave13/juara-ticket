@@ -77,12 +77,12 @@
                     <img src="{{ asset('assets/images/icons/ticket-star-black.svg') }}" class="w-8 h-8" alt="icon">
                     <p class="leading-[28px]">
                         @if ($data->status === \App\Enums\BookingStatus::PENDING)
-                            Pembayaran Anda saat ini pending, tiket belum tersedia.
+                            Your payment is still on pending process. The ticket is not available yet.
                         @elseif($data->status === \App\Enums\BookingStatus::SUCCESS)
-                            Gunakan kode <span class="font-bold">JRT19039</span> ketika menukarkan
-                            dengan tiket asli
+                            Use the <span class="font-bold">booking code</span> when you exchanging for original
+                            ticket.
                         @else
-                            Tiket telah dibatalkan. Anda tidak bisa menggunakan tiket ini.
+                            The ticket has been cancelled. You can't use this ticket.
                         @endif
                     </p>
                 </div>
