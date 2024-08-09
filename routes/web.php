@@ -24,6 +24,8 @@ Route::prefix('ticket')->name('ticket.')->group(function () {
 });
 
 Route::prefix('booking')->name('booking.')->group(function () {
+    Route::get('/{booking}', [BookingController::class, 'show'])->name('show');
+
     Route::get('/finish/{booking}', [BookingController::class, 'finish'])->name('finish');
 
     Route::get('/payment', [BookingController::class, 'payment'])->name('payment');
