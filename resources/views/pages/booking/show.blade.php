@@ -77,7 +77,7 @@
                     <img src="{{ asset('assets/images/icons/ticket-star-black.svg') }}" class="w-8 h-8" alt="icon">
                     <p class="leading-[28px]">
                         @if ($data->status === \App\Enums\BookingStatus::PENDING)
-                            Your payment is still on pending process. The ticket is not available yet.
+                            Your payment is still on pending. The ticket is not available yet.
                         @elseif($data->status === \App\Enums\BookingStatus::SUCCESS)
                             Use the <span class="font-bold">booking code</span> when you exchanging for original
                             ticket.

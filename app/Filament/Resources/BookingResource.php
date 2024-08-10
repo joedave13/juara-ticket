@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\BookingStatus;
 use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers;
+use App\Filament\Resources\BookingResource\Widgets\BookingStats;
 use App\Models\Booking;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -83,6 +84,7 @@ class BookingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -185,5 +187,12 @@ class BookingResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::$model::where('status', BookingStatus::PENDING)->count();
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            BookingStats::class
+        ];
     }
 }
