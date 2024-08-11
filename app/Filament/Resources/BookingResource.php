@@ -144,7 +144,6 @@ class BookingResource extends Resource
                                 $record->approve();
                                 SendBookingApprovedEmail::dispatch($record);
                             })
-                            // ->action(fn(Booking $record) => $record->approve())
                             ->after(function () {
                                 Notification::make()
                                     ->success()
@@ -267,7 +266,7 @@ class BookingResource extends Resource
                     ->openUrlInNewTab()
                     ->icon('heroicon-m-link')
                     ->color('info')
-                    ->label('Open Payment Proof')
+                    ->label('Payment Proof')
             ])
                 ->verticalAlignment(VerticalAlignment::End)
         ]);
