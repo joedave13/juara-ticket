@@ -1,10 +1,8 @@
 <x-mail::message>
-# Introduction
+Hi {{ $booking->name }}, we have approved your payment. You can use your ticket later from check ticket page using your booking code : <strong>{{ $booking->code }}</strong>.
 
-The body of your message.
-
-<x-mail::button :url="''">
-Button Text
+<x-mail::button :url="$check_booking_url">
+Check Booking
 </x-mail::button>
 
 Thanks,<br>

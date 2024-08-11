@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,12 +14,14 @@ class BookingApproved extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $booking;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(Booking $booking)
     {
-        //
+        $this->booking = $booking;
     }
 
     /**
@@ -27,7 +30,7 @@ class BookingApproved extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Booking Approved',
+            subject: 'JuaraTiket: Booking Approved',
         );
     }
 
@@ -38,6 +41,9 @@ class BookingApproved extends Mailable
     {
         return new Content(
             markdown: 'mail.bookings.approved',
+            with: [
+                'check_booking_url' => route('booking.check')
+            ]
         );
     }
 

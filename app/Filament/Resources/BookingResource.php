@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers;
 use App\Filament\Resources\BookingResource\Widgets\BookingStats;
+use App\Jobs\SendBookingApprovedEmail;
 use App\Models\Booking;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -139,7 +140,11 @@ class BookingResource extends Resource
                             ->icon('heroicon-o-check')
                             ->color('success')
                             ->visible(fn(Booking $record) => $record->status === BookingStatus::PENDING)
-                            ->action(fn(Booking $record) => $record->approve())
+                            ->action(function (Booking $record) {
+                                $record->approve();
+                                SendBookingApprovedEmail::dispatch($record);
+                            })
+                            // ->action(fn(Booking $record) => $record->approve())
                             ->after(function () {
                                 Notification::make()
                                     ->success()
