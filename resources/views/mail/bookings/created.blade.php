@@ -1,10 +1,8 @@
 <x-mail::message>
-# Introduction
+Hi {{ $booking->name }}, thank you for ordering ticket in JuaraTicket. We are currently checking your payment, you can check your ticket via check ticket page using your booking code : <strong>{{ $booking->code }}</strong>.
 
-The body of your message.
-
-<x-mail::button :url="''">
-Button Text
+<x-mail::button :url="$check_booking_url">
+Cek Booking
 </x-mail::button>
 
 Thanks,<br>

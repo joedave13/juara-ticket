@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendBookingCreatedEmail;
 use App\Models\Booking;
 use App\Models\Ticket;
 use App\Repositories\Contracts\BookingRepositoryInterface;
@@ -89,6 +90,8 @@ class BookingService
             $createdBooking = $this->bookingRepository->create($data);
 
             Session::forget('booking_session');
+
+            SendBookingCreatedEmail::dispatch($createdBooking);
 
             DB::commit();
 
