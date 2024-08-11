@@ -14,13 +14,14 @@ class BookingCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $booking;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        protected Booking $booking
-    ) {
-        //
+    public function __construct(Booking $booking)
+    {
+        $this->booking = $booking;
     }
 
     /**

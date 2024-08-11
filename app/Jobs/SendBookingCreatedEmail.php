@@ -15,13 +15,14 @@ class SendBookingCreatedEmail implements ShouldQueue
 {
     use Queueable;
 
+    public $booking;
+
     /**
      * Create a new job instance.
      */
-    public function __construct(
-        protected Booking $booking
-    ) {
-        //
+    public function __construct(Booking $booking)
+    {
+        $this->booking = $booking;
     }
 
     /**
