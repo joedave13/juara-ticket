@@ -29,7 +29,9 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->colors([
                 'primary' => Color::Sky,
-                'gray' => Color::Gray
+                'gray' => Color::Gray,
+                'orange' => Color::Orange,
+                'indigo' => Color::Indigo,
             ])
             ->darkMode(true, isForced: true)
             ->profile(isSimple: false)
@@ -58,7 +60,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->navigationGroups([
-                'Master Data', 'Transaction'
+                'Master Data',
+                'Transaction'
             ]);
     }
 }

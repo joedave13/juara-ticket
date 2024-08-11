@@ -12,7 +12,7 @@ enum BookingStatus: string implements HasLabel
 
     public function getLabel(): ?string
     {
-        return str(str($this->value)->replace('_', ''))->title();
+        return str(str($this->value)->replace('_', ' '))->title();
     }
 
     public function getColorLabelFront(): string

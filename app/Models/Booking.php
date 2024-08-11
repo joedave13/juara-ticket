@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookingPaymentMethod;
 use App\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,7 +44,8 @@ class Booking extends Model
         'booking_date' => 'date',
         'price' => 'integer',
         'total' => 'integer',
-        'status' => BookingStatus::class
+        'status' => BookingStatus::class,
+        'payment_method' => BookingPaymentMethod::class
     ];
 
     public function ticket(): BelongsTo

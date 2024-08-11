@@ -9,8 +9,14 @@ use App\Filament\Resources\BookingResource\Widgets\BookingStats;
 use App\Models\Booking;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Actions\Action as FilamentAction;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
@@ -18,6 +24,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 
 use function Livewire\after;
 
@@ -194,5 +201,70 @@ class BookingResource extends Resource
         return [
             BookingStats::class
         ];
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist->schema([
+            TextEntry::make('created_at')
+                ->label('Transaction Date'),
+            TextEntry::make('code')
+                ->label('Booking Code')
+                ->badge()
+                ->color('primary'),
+            Section::make('Customer Detail')
+                ->schema([
+                    TextEntry::make('name')
+                        ->label('Name'),
+                    TextEntry::make('email')
+                        ->label('Email'),
+                    TextEntry::make('phone')
+                        ->label('Phone'),
+                ])
+                ->columns(3),
+            Section::make('Ticket Detail')
+                ->schema([
+                    TextEntry::make('ticket.name')
+                        ->label('Ticket Name'),
+                    TextEntry::make('ticket.city.name')
+                        ->label('Ticket City'),
+                    TextEntry::make('price')
+                        ->label('Ticket Price')
+                        ->numeric()
+                        ->prefix('Rp '),
+                ])
+                ->columns(3),
+            Section::make('Additional Information')
+                ->schema([
+                    TextEntry::make('booking_date')
+                        ->label('Booking Date'),
+                    TextEntry::make('total_participant')
+                        ->label('Total Participant'),
+                    TextEntry::make('total')
+                        ->label('Total Price')
+                        ->numeric()
+                        ->prefix('Rp '),
+                    TextEntry::make('status')
+                        ->label('Status')
+                        ->badge()
+                        ->color(fn($state) => $state->getColor())
+                        ->icon(fn($state) => $state->getIcon()),
+                ])
+                ->columns(2),
+            TextEntry::make('payment_method')
+                ->label('Payment Method')
+                ->badge()
+                ->color(fn($state) => $state->getColor())
+                ->icon(fn($state) => $state->getIcon()),
+            Actions::make([
+                FilamentAction::make('openPaymentProof')
+                    ->url(fn(Booking $record): string => Storage::url($record->payment_proof))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-m-link')
+                    ->color('info')
+                    ->label('Open Payment Proof')
+            ])
+                ->verticalAlignment(VerticalAlignment::End)
+        ]);
     }
 }
